@@ -1,0 +1,82 @@
+swagger: "2.0"
+info:
+  description: "noharaテスト"
+  version: "1.0.0"
+  title: "Twistlock APIs"
+  contact:
+    email: nohara-m@macnica.net
+  license:
+    name: "ご利用規約"
+    url: "https://www.macnica.net"
+host: "35.184.87.155"
+basePath: "/api/v1"
+tags:
+- name: "twlk"
+  description: "Everything about tw"
+schemes:
+- "https"
+- "http"
+securityDefinitions:
+  basicAuth:
+    type: basic
+paths:
+  /registry:
+    get:
+      security:
+      - basicAuth: []
+      tags:
+      - "scan result"
+      summary: "get registry image scan result"
+      description: "testtest"
+      operationId: "getregistry"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "Status values that need to be considered for filter"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+          enum:
+          - "gcr.io/nohara-project/pingfederate:8.3"
+          - "gcr.io/nohara-project/couchbase:6.0.1"
+          - "gcr.io/nohara-project/busybox:1.30"
+          default: "gcr.io/nohara-project/busybox:1.30"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid status value"
+  /policies/compliance/container:
+    get:
+      security:
+      - basicAuth: []
+      tags:
+      - "scan result"
+      summary: "get registry image scan result"
+      description: "testtest"
+      operationId: "getContainerCompliancePolicy"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid status value"
+  /_ping:
+    get:
+      security:
+      - basicAuth: []
+      tags:
+      - "helthcheck result"
+      summary: "get healthcheck scan result"
+      description: "testtest"
+      operationId: "getHealthCheckResult"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid status value"
